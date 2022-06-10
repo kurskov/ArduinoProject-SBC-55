@@ -36,35 +36,19 @@ Wiring diagram for machine with serial number 525075-38-05.
 |24|filtration pump tank 1 (wash)|
 |25|light tower - green|
 |26|light tower - white|
-|27|light tower - red|
+|27|light tower - red||for error message|
 
-## Modes
+## Pins active (FX2N)
 
-*"WASH ON" light is on forever, so I disconnect it and didn't include in following lists.*  
-
-*White light on light tower is on *
-
-### Stand by
-Active:
-- drain valve tank 2 (rinse)
-- ventilation open
-- light tower - green
-- light tower - white
-
-*FX2N: 21, 22, 25, 26.*
-**ARM:**
-
-### Wash
-Active:
-- wash valve
-- heating tank 1 (wash)
-- heating tank 2 (rinse)
-- spray pomp tank 1 (wash)
-- filtration pump tank 2 (rinse)
-- spray agitation motor down (pulse mode)
-- spray agitation motor up (pulse mode)
-- safety door lock open
-- drain valve tank 1 (wash)
-- filtration pump tank 1 (wash)
-- light tower - green
-- light tower - white
+|Mode             | 0| 3| 4| 5| 6| 7|10|11|12|13|14|15|16|17|20|21|22|23|24|25|26|
+|-                | -| -| -| -| -| -| -| -| -| -| -| -| -| -| -| -| -| -| -| -| -|
+|**After on**     | x|  |  |  |  |  |  |  |  |  |  |  |  |  |  | x| x|  |  | x| x|
+|**Stand by**     | x|  |  |  |  |  |  |  | x|  |  |  |  |  |  | x| x|  | x| x| x|
+|**Wash**         | x| x| x| x|  |  | x|  | x| p| p|  |  | x| x|  |  |  | x| x| x|
+|**Air blast**    | x|  | x| x|  |  |  |  | x|  |  |  | x| x| x|  | x| x| x| x| x|
+|**Drip (tank 1)**| x|  | x| x|  |  |  |  | x|  |  |  |  | x| x|  | x|  | x| x| x|
+|**Rinse**        | x|  | x| x|  | x|  | x| x| p| p|  |  | x|  | x|  |  | x| x| x|
+|**Air blast**    | x|  | x| x|  |  |  |  | x|  |  |  | x| x|  | x| x| x| x| x| x|
+|**Drip (tank 2)**| x|  | x| x|  |  |  |  | x|  |  |  |  | x|  | x| x|  | x| x| x|
+|**Air blow**     | x|  |  |  | x|  |  |  | x| p| p| x| x| x|  | x| x| x| x| x| x|
+|**Drying**       | x|  |  |  | x|  |  |  | x|  |  | x| x| x|  | x| x|  | x| x| x|
