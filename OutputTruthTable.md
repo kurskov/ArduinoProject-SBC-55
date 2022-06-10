@@ -12,16 +12,16 @@ Wiring diagram for machine with serial number 525075-38-05.
 |0|"WASH ON" light|-|*disconnected*|
 |1|*not used*|-|
 |2|*not used*|-|
-|3|wash valve|
-|4|heating tank 1 (wash)|
-|5|heating tank 2 (rinse)|
+|3|wash valve|K1 on|connected to spray pomp (tank 1, wash)|
+|4|heating (tank 1, wash)|K3 on|connected to heating (tank 2, rinse)|
+|5|heating (tank 2, rinse)|K3 on|connected to heating (tank 1, wash)|
 |6|hot air|
-|7|rinse valve|
+|7|rinse valve|K2 on|connected to spray pomp (tank 2, rinse)|
 |8|*not used*|-|
 |9|*not used*|-|
-|10|spray pomp tank 1 (wash)|
-|11|spray pomp tank 2 (rinse)|
-|12|filtration pump tank 2 (rinse)|
+|10|spray pomp (tank 1, wash)|K1 on|connected to wash valve|
+|11|spray pomp (tank 2, rinse)|K2 on|connected to rinse valve|
+|12|filtration pump (tank 2, rinse)|
 |13|spray agitation motor down|
 |14|spray agitation motor up|
 |15|hot air blower|
