@@ -15,6 +15,6 @@ SBC55::SBC55() {
 
 // Machine initialization
 
-SBC55::init() {
-    
+uint8_t SBC55::init() {
+    return 0;
 }
