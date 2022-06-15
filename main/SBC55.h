@@ -11,6 +11,12 @@
 #ifndef _DK_SBC55_h
 #define _DK_SBC55_h
 
+#if defined(ARDUINO) && ARDUINO >= 100
+    #include <Arduino.h>
+#else
+    #include <WProgram.h>
+#endif
+
 class SBC55 {
     public:
         SBC55();
