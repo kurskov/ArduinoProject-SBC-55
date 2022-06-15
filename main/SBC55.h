@@ -17,12 +17,51 @@
     #include <WProgram.h>
 #endif
 
+#define ON 1
+#define OFF 0
+
+// Short types names
+#define ui8 uint8_t
+#define ui16 uint16_t
+
 class SBC55 {
     public:
         SBC55();
         
         // Check condition and position all parts of machine.
-        uint8_t init();
+        ui8 init();
+
+        // 
+        ui8 afterOn();
+
+        //
+        ui8 standBy();
+
+        //
+        ui8 wash(ui16 sec);
+
+        // 
+        ui8 rinse(ui16 sec);
+
+        //
+        ui8 airBlast(ui16 sec);
+
+        // 
+        ui8 drip(ui8 tank, ui16 sec);
+
+        //
+        ui8 airBlow(ui16 sec);
+
+        //
+        ui8 drying(ui16 sec);
+
+    private:
+
+        //
+        void setDoorLock(ui8 action);
+
+        //
+        void setVentilationValve(ui8 action);
 };
 
 #endif // _DK_SBC55_h
