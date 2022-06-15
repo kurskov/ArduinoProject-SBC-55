@@ -1,7 +1,6 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-#include "FastAtmega328.h"
 #include "SBC55.h"
 
 /* DEBUG MODE */
@@ -17,7 +16,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-SBC55 thing();
+SBC55 sbc();
 
 setup() {
   #ifdef DEBUG_ON
@@ -27,7 +26,7 @@ setup() {
   lcd.setCursor(0, 0);
   lcd.print("Loading... ");
   
-  if (thing.init()) STOPERROR;
+  if (sbc.init()) STOPERROR;
   lcd.print("Ok");
 }
 
