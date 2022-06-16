@@ -4,7 +4,7 @@
 #include "SBC55.h"
 
 /* DEBUG MODE */
-//#define DEBUG_ON 
+#define DEBUG_ON 
 
 #ifdef DEBUG_ON
   #define DEBUG(x) Serial.println(x)
@@ -15,8 +15,6 @@
 #define STOPERROR for(;;)
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-
-SBC55 sbc;
 
 void setup() {
   #ifdef DEBUG_ON
@@ -29,11 +27,11 @@ void setup() {
   lcd.setCursor(0, 1);
   lcd.print("machine... ");
   
-  if (sbc.init()) STOPERROR;
-  sbc.afterOn();
+  if (SBC.init()) STOPERROR;
+  SBC.afterOn();
   lcd.print("Ok");
 }
 
 void loop() {
-
+  //SBC.airBlast(3);
 }
