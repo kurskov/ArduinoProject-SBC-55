@@ -26,7 +26,7 @@ Wiring diagram for machine with serial number 525075-38-05.
 |14|spray agitation motor up|K6 on||
 |15|hot air blower|K4 on|connected to hot air|
 |16|drayn valve control (tank 2)|K11 on||
-|17|safety door lock open|K10 off||
+|17|safety door lock open|K10 on||
 |18|*not used*|-||
 |19|*not used*|-||
 |20|drain valve tank 1 (wash)|K8 on||

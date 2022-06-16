@@ -30,7 +30,7 @@ void setup() {
   lcd.print("machine... ");
   
   if (sbc.init()) STOPERROR;
-  if (sbc.afterOn()) STOPERROR;
+  sbc.afterOn();
   lcd.print("Ok");
 }
 

@@ -17,51 +17,54 @@
     #include <WProgram.h>
 #endif
 
-#define ON 1
-#define OFF 0
-
-// Short types names
-#define ui8 uint8_t
-#define ui16 uint16_t
-
 class SBC55 {
     public:
-        SBC55();
+        SBC55() {}
         
         // Check condition and position all parts of machine.
-        ui8 init();
+        uint8_t init() {
+            return 0;
+        }
 
         // 
-        ui8 afterOn();
+        // Beacon: white & green
+        void afterOn() {
+            setVentValveOpen();
+            setDoorLockOpen();
+            delay(1000);
+        }
 
         //
-        ui8 standBy();
+        // Beacon: white & green
+        void standBy() {
+            setVentValveOpen();
+            setDoorLockOpen();
+            delay(1000);
+        }
 
         //
-        ui8 wash(ui16 sec);
+        uint8_t wash(uint16_t sec);
 
         // 
-        ui8 rinse(ui16 sec);
+        uint8_t rinse(uint16_t sec);
 
         //
-        ui8 airBlast(ui16 sec);
+        uint8_t airBlast(uint16_t sec);
 
         // 
-        ui8 drip(ui8 tank, ui16 sec);
+        uint8_t drip(uint8_t tank, uint16_t sec);
 
         //
-        ui8 airBlow(ui16 sec);
+        uint8_t airBlow(uint16_t sec);
 
         //
-        ui8 drying(ui16 sec);
+        uint8_t drying(uint16_t sec);
 
     private:
-
-        //
-        void setDoorLock(ui8 action);
-
-        //
-        void setVentilationValve(ui8 action);
+        void setVentValveOpen() {}
+        void setVentValveClose() {}
+        void setDoorLockOpen() {}
+        void setDoorLockClose() {}
 };
 
 #endif // _DK_SBC55_h
