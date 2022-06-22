@@ -16,10 +16,10 @@
     #include <WProgram.h>
 #endif
 
-/* DEBUG_SBC MODE */
-#define DEBUG_SBC_ON 
 
-#ifdef DEBUG_SBC_ON
+#define DEBUG_ON
+/* DEBUG_SBC MODE */
+#ifdef DEBUG_ON
   #define DEBUG_SBC(x) Serial.println(x)
 #else
   #define DEBUG_SBC(x)
@@ -29,14 +29,15 @@
 #define OUT_DOORLOCK 1
 #define OUT_VENTVALVE 2
 #define OUT_AIRVALVE 3
+#define OUT_HEATER 4
+#define OUT_AIRBLOWER 5 
 
 class SBC55 {
     public:
         SBC55(uint8_t latchPin, uint8_t clockPin, uint8_t dataPin) {
-            #ifdef DEBUG_SBC_ON
-                Serial.begin(9600);
-            #endif
-
+  #ifdef DEBUG_ON
+    Serial.begin(9600);
+  #endif
             _latchPin = latchPin;
             _clockPin = clockPin;
             _dataPin = dataPin;
@@ -60,7 +61,7 @@ class SBC55 {
         }
 
         // 
-        // Beacon: white & green
+        // Beacon: green
         void afterOn() {
             DEBUG_SBC("\n> After on");
             setVentValveOpen();
@@ -70,7 +71,7 @@ class SBC55 {
         }
 
         //
-        // Beacon: white & green
+        // Beacon: green
         void standBy() {
             DEBUG_SBC("\n> Stand by");
             setVentValveOpen();
@@ -86,7 +87,7 @@ class SBC55 {
         uint8_t rinse(uint16_t sec);
 
         // 
-        // Beacon: green
+        // Beacon: green & white
         uint8_t airBlast(uint16_t sec) {
             DEBUG_SBC("\n> Air blast");
             setDoorLockClose();
@@ -101,7 +102,7 @@ class SBC55 {
         uint8_t drip(uint8_t tank, uint16_t sec);
 
         //
-        // Beacon: green
+        // Beacon: green & white
         uint8_t airBlow(uint16_t sec) {
             DEBUG_SBC("\n> Air blow");
             setDoorLockClose();
@@ -112,8 +113,22 @@ class SBC55 {
             delay(1000);
         }
 
-        //
-        uint8_t drying(uint16_t sec);
+        // Beacon: green & white
+        uint8_t drying(uint16_t sec) {
+            DEBUG_SBC("\n> Drying");
+            setDoorLockClose();
+            delay(1000);
+            setVentValveOpen();
+            delay(1000);
+            setAirBlowerOn();
+            delay(1000);
+            setHeaterOn();
+            delay(sec * 1000);
+            setHeaterOff();
+            delay(5000);
+            setAirBlowerOff();
+            delay(1000);
+        }
 
     private:
 
@@ -185,7 +200,35 @@ class SBC55 {
         }
 
         
-        /*  */
+        /* Hot air blow */
+
+        // Heater on
+        void setHeaterOn() {
+            _outputs |= (1<<OUT_HEATER);
+            setOutputs();
+            DEBUG_SBC("...Heater on");
+        }
+
+        // Heater off
+        void setHeaterOff() {
+            _outputs &= ~(1<<OUT_HEATER);
+            setOutputs();
+            DEBUG_SBC("...Heater off");
+        }
+
+        // Air blower on
+        void setAirBlowerOn() {
+            _outputs |= (1<<OUT_AIRBLOWER);
+            setOutputs();
+            DEBUG_SBC("...Air blower on");
+        }
+
+        // Air blower off
+        void setAirBlowerOff() {
+            _outputs &= ~(1<<OUT_AIRBLOWER);
+            setOutputs();
+            DEBUG_SBC("...Air blower off");
+        }
 };
 
 #endif // _DK_SBC55_h

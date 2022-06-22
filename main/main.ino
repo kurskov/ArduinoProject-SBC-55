@@ -40,7 +40,12 @@ void loop() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Air blast");
-  sbc.airBlast(3);
+  sbc.airBlast(5);
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Drying");
+  sbc.drying(10);
 
   lcd.clear();
   lcd.setCursor(0, 0);
