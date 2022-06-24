@@ -35,12 +35,14 @@
 class SBC55 {
     public:
         SBC55(uint8_t latchPin, uint8_t clockPin, uint8_t dataPin) {
-  #ifdef DEBUG_ON
-    Serial.begin(9600);
-  #endif
+            #ifdef DEBUG_ON
+                Serial.begin(9600);
+            #endif
+
             _latchPin = latchPin;
             _clockPin = clockPin;
             _dataPin = dataPin;
+
             pinMode(_latchPin, OUTPUT);
             pinMode(_dataPin, OUTPUT); 
             pinMode(_clockPin, OUTPUT);
@@ -138,7 +140,7 @@ class SBC55 {
         uint8_t _clockPin;  // SH_CP pin of 74HC595
         uint8_t _dataPin;   // DS pin of 74HC595
         
-        uint16_t _outputs = 0; // outputs state
+        uint16_t _outputs = 0xFFFF; // outputs state
 
         // Send outputs state to the relay module.
         // First - high bit, second - low bit.
@@ -153,14 +155,14 @@ class SBC55 {
         
         // Open safety door lock
         void setDoorLockOpen() {
-            _outputs &= ~(1<<OUT_DOORLOCK);
+            _outputs |= (1<<OUT_DOORLOCK);
             setOutputs();
             DEBUG_SBC("...Open safety door lock");
         }
         
         // Close safety door lock
         void setDoorLockClose() {
-            _outputs |= (1<<OUT_DOORLOCK);
+            _outputs &= ~(1<<OUT_DOORLOCK);
             setOutputs();
             DEBUG_SBC("...Close safety door lock");
         }
@@ -170,14 +172,14 @@ class SBC55 {
         
         // Open ventilation valve (Y023)
         void setVentValveOpen() {
-            _outputs |= (1<<OUT_VENTVALVE);
+            _outputs &= ~(1<<OUT_VENTVALVE);
             setOutputs();
             DEBUG_SBC("...Open ventilation valve (Y023 on)");
         }
         
         // Close ventilation valve (Y023)
         void setVentValveClose() {
-            _outputs &= ~(1<<OUT_VENTVALVE);
+            _outputs |= (1<<OUT_VENTVALVE);
             setOutputs();
             DEBUG_SBC("...Close ventilation valve (Y023 off)");
         }
@@ -187,14 +189,14 @@ class SBC55 {
         
         // Open air valve (Y024)
         void setAirValveOpen() {
-            _outputs |= (1<<OUT_AIRVALVE);
+            _outputs &= ~(1<<OUT_AIRVALVE);
             setOutputs();
             DEBUG_SBC("...Open air valve (Y024 off)");
         }
 
         // Close air valve (Y024)
         void setAirValveClose() {
-            _outputs &= ~(1<<OUT_AIRVALVE);
+            _outputs |= (1<<OUT_AIRVALVE);
             setOutputs();
             DEBUG_SBC("...Close air valve (Y024 off)");
         }
@@ -204,28 +206,28 @@ class SBC55 {
 
         // Heater on
         void setHeaterOn() {
-            _outputs |= (1<<OUT_HEATER);
+            _outputs &= ~(1<<OUT_HEATER);
             setOutputs();
             DEBUG_SBC("...Heater on");
         }
 
         // Heater off
         void setHeaterOff() {
-            _outputs &= ~(1<<OUT_HEATER);
+            _outputs |= (1<<OUT_HEATER);
             setOutputs();
             DEBUG_SBC("...Heater off");
         }
 
         // Air blower on
         void setAirBlowerOn() {
-            _outputs |= (1<<OUT_AIRBLOWER);
+            _outputs &= ~(1<<OUT_AIRBLOWER);
             setOutputs();
             DEBUG_SBC("...Air blower on");
         }
 
         // Air blower off
         void setAirBlowerOff() {
-            _outputs &= ~(1<<OUT_AIRBLOWER);
+            _outputs |= (1<<OUT_AIRBLOWER);
             setOutputs();
             DEBUG_SBC("...Air blower off");
         }

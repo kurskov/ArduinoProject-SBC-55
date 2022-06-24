@@ -28,8 +28,8 @@ void setup() {
   #endif
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0, 0);
-  lcd.print("Data load...");
+  lcd.setCursor(1, 0);
+  lcd.print("Initialisation");
   
   if (sbc.init()) STOPERROR;
   sbc.afterOn();
@@ -40,7 +40,7 @@ void loop() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Air blast");
-  sbc.airBlast(5);
+  sbc.airBlast(10);
 
   lcd.clear();
   lcd.setCursor(0, 0);
